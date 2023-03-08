@@ -6,7 +6,7 @@
 /*   By: zrebhi <zrebhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:12:12 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/08 17:52:06 by zrebhi           ###   ########.fr       */
+/*   Updated: 2023/03/08 18:55:26 by zrebhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,6 @@ for invalid redirections. */
 
 int	ft_error(char **parsed_line, int i)
 {
-	if ((!ft_strcmp(parsed_line[i], ">>") \
-		|| !ft_strcmp(parsed_line[i], "<") \
-		|| !ft_strcmp(parsed_line[i], "<<")))
-	{
-		if (!parsed_line[i + 1])
-			return (1);
-		if (!ft_strcmp(parsed_line[i + 1], ">") \
-			||!ft_strcmp(parsed_line[i + 1], ">>") \
-			|| !ft_strcmp(parsed_line[i + 1], "<") \
-			|| !ft_strcmp(parsed_line[i + 1], "<<") \
-			|| !ft_strcmp(parsed_line[i + 1], "|"))
-			return (2);
-	}
 	if (!ft_strcmp(parsed_line[i], ">"))
 	{
 		if (!parsed_line[i + 1])
@@ -48,6 +35,19 @@ int	ft_error(char **parsed_line, int i)
 			|| !ft_strcmp(parsed_line[i + 1], "<<"))
 			return (2);
 	}
+	if ((!ft_strcmp(parsed_line[i], ">>") \
+		|| !ft_strcmp(parsed_line[i], "<") \
+		|| !ft_strcmp(parsed_line[i], "<<")))
+	{
+		if (!parsed_line[i + 1])
+			return (1);
+		if (!ft_strcmp(parsed_line[i + 1], ">") \
+			||!ft_strcmp(parsed_line[i + 1], ">>") \
+			|| !ft_strcmp(parsed_line[i + 1], "<") \
+			|| !ft_strcmp(parsed_line[i + 1], "<<") \
+			|| !ft_strcmp(parsed_line[i + 1], "|"))
+			return (2);
+	}
 	if (!ft_strcmp(parsed_line[i], "|"))
 		if (!parsed_line[i + 1])
 			return (3);
@@ -56,8 +56,8 @@ int	ft_error(char **parsed_line, int i)
 
 void	ft_syntax_error(char **parsed_line, int i)
 {
-	if (parsed_line[i + 1] && !!ft_strcmp(parsed_line[i], ">") \
-		&& !ft_strcmp(parsed_line[i + 1], "|"))
+	if (!ft_strcmp(parsed_line[i - 1], ">") \
+		&& !ft_strcmp(parsed_line[i], "|"))
 		i++;
 	ft_putstr_fd("syntax error near unexpected token '", 2);
 	ft_putstr_fd(parsed_line[i], 2);
@@ -91,8 +91,15 @@ void	ft_fullcmds(char **parsed_line, t_cmdlist *cmds, int i, int j)
 			j = 0;
 			i++;
 		}
-		else if (!ft_strcmp(parsed_line[i], ">") \
-			||!ft_strcmp(parsed_line[i], ">>") \
+		else if (!ft_strcmp(parsed_line[i], ">"))
+		{
+			i++;
+			if (parsed_line[i] && !ft_strcmp(parsed_line[i], "|"))
+				i++;
+			if (parsed_line[i])
+				i++;
+		}
+		else if (!ft_strcmp(parsed_line[i], ">>") \
 			|| !ft_strcmp(parsed_line[i], "<") \
 			|| !ft_strcmp(parsed_line[i], "<<"))
 		{
@@ -109,7 +116,7 @@ void	ft_fullcmds(char **parsed_line, t_cmdlist *cmds, int i, int j)
 in the input line and useful informations for each of them. */
 
 char	**ft_remove_quotes(char **strs);
-int	ft_check_heredoc(char *cmd_line, t_cmdlist *cmds, t_env **head);
+int		ft_check_heredoc(char *cmd_line, t_cmdlist *cmds, t_env **head);
 int		ft_redirection(char **parsed_line, t_cmdlist *cmds);
 
 t_cmdlist	*ft_cmdlist(char *cmd_line, t_minishell *data)

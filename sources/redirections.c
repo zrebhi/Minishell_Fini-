@@ -6,7 +6,7 @@
 /*   By: zrebhi <zrebhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:51:24 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/08 17:43:55 by zrebhi           ###   ########.fr       */
+/*   Updated: 2023/03/08 18:52:06 by zrebhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,18 +82,9 @@ int	ft_redirection(char **parsed_line, t_cmdlist *cmds)
 			ft_redirect_outfile_append(parsed_line, cmds, i);
 		else if (!ft_strcmp(parsed_line[i], ">"))
 		{
-			if (parsed_line[i + 1] && parsed_line[i + 2] && !ft_strcmp(parsed_line[i + 1], "|"))
-			{
+			if (parsed_line[i + 1] && !ft_strcmp(parsed_line[i + 1], "|"))
 				i++;
-				continue ;
-			}	
 			ft_redirect_outfile(parsed_line, cmds, i);
-		}	
-		if (ft_error(parsed_line, i))
-		{
-			ft_print_error(parsed_line, i);
-			g_status = 2;
-			return (0);
 		}
 	}
 	return (1);

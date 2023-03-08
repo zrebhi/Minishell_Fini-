@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zrebhi <zrebhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:52:56 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/07 20:06:26 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/08 18:27:23 by zrebhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,6 @@ int	ft_check_heredoc(char *cmd_line, t_cmdlist *cmds, t_env **head)
 	i = -1;
 	while (parsed_line[++i])
 	{
-		if (!ft_strcmp(parsed_line[i], ">"))
-		{
-			if (parsed_line[i + 1] && parsed_line[i + 2] && !ft_strcmp(parsed_line[i + 1], "|"))
-			{
-				i++;
-				continue ;
-			}	
-		}	
 		if (ft_error(parsed_line, i))
 		{
 			ft_print_error(parsed_line, i);
