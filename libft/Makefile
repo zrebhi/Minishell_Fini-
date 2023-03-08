@@ -25,7 +25,7 @@ OBJ            :=    $(SRC:%.c=$(OBJ_DIR)%.o)
 
 # Compiler options
 CC            :=    cc
-CC_FLAGS      :=    -Wextra -Werror -Wall -g3
+CC_FLAGS      :=    -Wextra -Werror -Wall
 DEBUG_FLAG    :=    -ggdb3
 
 # define standard colors

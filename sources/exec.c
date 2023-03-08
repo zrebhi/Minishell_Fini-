@@ -6,7 +6,7 @@
 /*   By: zrebhi <zrebhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 13:17:49 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/08 16:32:30 by zrebhi           ###   ########.fr       */
+/*   Updated: 2023/03/08 19:31:32 by zrebhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_exec(t_minishell *data)
 
 	if (!ft_strncmp(data->cmds->full_cmd[0], "./", 2) \
 	&& access(data->cmds->full_cmd[0], X_OK) == -1)
-		return (printf("ici\n"), perror(data->cmds->full_cmd[0]), exit(126));
+		return (perror(data->cmds->full_cmd[0]), exit(126));
 	data->paths = ft_pathfinder(&data->head_env);
 	i = -1;
 	execve(data->cmds->full_cmd[0], data->cmds->full_cmd, data->envp);
@@ -78,7 +78,6 @@ void	ft_incubator(t_minishell *data)
 	if (ft_builtins(data))
 		exit(0);
 	ft_exec(data);
-	exit(127);
 }
 
 int	pipex_heredoc(t_minishell *data)
@@ -146,7 +145,7 @@ void	pipex(t_minishell *data)
 	while (data->cmds)
 	{
 		waitpid(data->cmds->cmd_pid, &data->status, 0);
-		g_status = WEXITSTATUS(g_status);
+		g_status = WEXITSTATUS(data->status);
 		data->cmds = data->cmds->next;
 	}
 	exit (g_status);

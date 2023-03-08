@@ -6,7 +6,7 @@
 /*   By: zrebhi <zrebhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:02:59 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/08 18:22:07 by zrebhi           ###   ########.fr       */
+/*   Updated: 2023/03/08 19:31:52 by zrebhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,7 @@ void	ft_prompt(t_minishell *data)
 			if (pid == 0)
 				pipex(data);
 			waitpid(pid, &data->status, 0);
-			if (!g_status)
-				g_status = WEXITSTATUS(g_status);
+			g_status = WEXITSTATUS(data->status);
 			while (data->cmds)
 			{
 				if (data->cmds->here_doc && close(data->cmds->here_doc_pipe[0]) == -1)
