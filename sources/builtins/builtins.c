@@ -6,14 +6,18 @@
 /*   By: zrebhi <zrebhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 16:24:08 by bgresse           #+#    #+#             */
-/*   Updated: 2023/03/08 16:39:03 by zrebhi           ###   ########.fr       */
+/*   Updated: 2023/03/08 17:55:22 by zrebhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+void    ft_built_in_echo(char **cmd);
+
 int	ft_builtins(t_minishell *data)
 {
+	if (!ft_strcmp(data->cmds->full_cmd[0], "echo"))
+        return (ft_built_in_echo(data->cmds->full_cmd), 1);
 	if (!ft_strcmp(data->cmds->full_cmd[0], "pwd"))
 		return (ft_built_in_pwd(), 1);
 	if (!ft_strcmp(data->cmds->full_cmd[0], "env") && \

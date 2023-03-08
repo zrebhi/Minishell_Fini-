@@ -6,7 +6,7 @@
 /*   By: zrebhi <zrebhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:02:59 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/08 16:04:55 by zrebhi           ###   ########.fr       */
+/*   Updated: 2023/03/08 18:14:29 by zrebhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,12 @@ void	ft_prompt(t_minishell *data)
 int	main(int argc, char **argv, char **envp)
 {
 	t_minishell	*data;
+	struct sigaction	sa;
 
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = SA_RESTART;
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	data = malloc(sizeof(t_minishell));
 	data_init(argc, argv, envp, data);
 	ft_prompt(data);
