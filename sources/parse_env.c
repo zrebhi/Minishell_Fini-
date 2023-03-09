@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrebhi <zrebhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:06:30 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/08 16:08:35 by zrebhi           ###   ########.fr       */
+/*   Updated: 2023/03/09 00:57:11 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	ft_parse_env(t_env **head, char **envp)
 	}
 	while (envp[i])
 	{
-		equal = ft_strchr(envp[i], '='); if (equal)
+		equal = ft_strchr(envp[i], '=');
+		if (equal)
 		{
 			key = ft_strndup(envp[i], equal - envp[i]);
 			if (ft_strcmp(key, "SHLVL") == 0)

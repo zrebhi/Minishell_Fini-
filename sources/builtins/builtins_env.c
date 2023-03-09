@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 12:37:40 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/07 17:20:37 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/09 00:54:14 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ void	ft_built_in_env(char **envp)
 	while (envp[++i])
 	{
 		if (ft_strchr(envp[i], '='))
-		printf("%s\n", envp[i]);
+			printf("%s\n", envp[i]);
 	}
 }

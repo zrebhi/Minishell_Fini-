@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtins_unset.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/08 23:13:52 by bgresse           #+#    #+#             */
+/*   Updated: 2023/03/08 23:13:54 by bgresse          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 static void	remove_env_node(t_env **head, char *key)
@@ -22,7 +34,6 @@ static void	remove_env_node(t_env **head, char *key)
 	prev->next = current->next;
 	return (free(current->key), free(current->value), free(current));
 }
-
 
 void	ft_built_in_unset(t_env **head, char **key_list)
 {

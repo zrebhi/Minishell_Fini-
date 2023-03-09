@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zrebhi <zrebhi@student.42.fr>              +#+  +:+       +#+         #
+#    By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/03 16:11:01 by zrebhi            #+#    #+#              #
-#    Updated: 2023/03/08 17:57:42 by zrebhi           ###   ########.fr        #
+#    Updated: 2023/03/09 00:43:07 by bgresse          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC            :=    cmdlist.c cmdlist_utils.c \
 					 main.c parse_env.c redirections.c signals.c signals_handlers.c \
 					 builtins/builtins_env.c builtins/builtins_cd.c builtins/builtins_export.c \
 					 builtins/builtins_unset.c builtins/builtins.c builtins/builtins_exit.c \
-					 builtins/builtins_pwd.c builtins/builtins_echo.c
+					 builtins/builtins_pwd.c builtins/builtins_echo.c builtins/builtins_export2.c
 
 LIBFT_DIR	   :=    libft/
 LIBFT_A		   :=    $(LIBFT_DIR)libft.a

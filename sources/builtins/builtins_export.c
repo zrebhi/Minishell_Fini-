@@ -1,88 +1,45 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtins_export.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/08 23:33:48 by bgresse           #+#    #+#             */
+/*   Updated: 2023/03/09 00:48:53 by bgresse          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void ft_print_env_sorted(t_env *env)
+void	print_env_variable(t_env *env);
+void	print_sorted_env_array(t_env **array, int count);
+void	sort_env_array(t_env **array, int count);
+void	copy_env_to_array(t_env *env, t_env **array, int count);
+void	ft_print_env_sorted(t_env *env);
+
+t_env	*ft_get_env_node(t_env **head, char *key)
 {
-	// Copie de la liste chaînée
-	t_env *copy = env;
-	int count = 0;
-	while (copy != NULL)
-	{
-		count++;
-		copy = copy->next;
-	}
+	t_env	*temp;
 
-	t_env **array = malloc(count * sizeof(t_env *));
-	if (array == NULL)
-	{
-		printf("Erreur d'allocation de mémoire\n");
-		return;
-	}
-
-	copy = env;
-	for (int i = 0; i < count; i++)
-	{
-		array[i] = copy;
-		copy = copy->next;
-	}
-
-	// Tri à bulles
-	for (int i = 0; i < count - 1; i++)
-	{
-		for (int j = 0; j < count - i - 1; j++)
-		{
-			if (ft_strcmp(array[j]->key, array[j+1]->key) > 0)
-			{
-				t_env *temp = array[j];
-				array[j] = array[j+1];
-				array[j+1] = temp;
-			}
-		}
-	}
-
-	// Affichage des éléments triés
-	for (int i = 0; i < count; i++)
-	{
-		if (ft_strcmp(array[i]->value, ""))
-		{
-			printf("declare -x %s", array[i]->key);
-			if (array[i]->equal)
-				printf("=");
-			printf("\"%s\"\n", array[i]->value);
-		}
-		else
-		{
-			printf("declare -x %s", array[i]->key);
-			if (array[i]->equal)
-				printf("=\"\"\n");
-			else
-				printf("\n");
-		}
-	}
-	// Libération de la mémoire allouée
-	free(array);
-}
-
-t_env *ft_get_env_node(t_env **head, char *key)
-{
-	t_env *temp = *head;
-
+	temp = *head;
 	while (temp != NULL)
 	{
 		if (ft_strcmp(temp->key, key) == 0)
-			return temp;
+			return (temp);
 		temp = temp->next;
 	}
-	return NULL;
+	return (NULL);
 }
 
-void ft_modify_env_with_equal_sign(t_env **head, char *cmd_arg)
+void	ft_modify_env_with_equal_sign(t_env **head, char *cmd_arg)
 {
-	t_env *env_var;
-	char *key; 
-	char *value;
-	
-	key = ft_strndup(cmd_arg, ft_strlen(cmd_arg) - ft_strlen(ft_strchr(cmd_arg, '=')));
+	t_env	*env_var;
+	char	*key;
+	char	*value;
+
+	key = ft_strndup(cmd_arg,
+			ft_strlen(cmd_arg)- ft_strlen(ft_strchr(cmd_arg, '=')));
 	value = ft_strdup(ft_strchr(cmd_arg, '=') + 1);
 	env_var = ft_get_env_node(head, key);
 	if (env_var)
@@ -95,16 +52,15 @@ void ft_modify_env_with_equal_sign(t_env **head, char *cmd_arg)
 		*head = add_node(*head, key, value, true);
 }
 
-void ft_modify_env_without_equal_sign(t_env **head, char *cmd_arg)
+void	ft_modify_env_without_equal_sign(t_env **head, char *cmd_arg)
 {
 	if (!ft_get_env_node(head, cmd_arg))
 		*head = add_node(*head, cmd_arg, "", false);
 }
 
-
 int	ft_check_env_var_name(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (ft_isdigit(str[i]) || !ft_isalnum(str[i]))
@@ -128,7 +84,7 @@ int	ft_check_env_var_name(char *str)
 	return (1);
 }
 
-void ft_built_in_export(t_env **head, char **full_cmd)
+void	ft_built_in_export(t_env **head, char **full_cmd)
 {
 	size_t	i;
 

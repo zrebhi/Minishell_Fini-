@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrebhi <zrebhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:31:03 by bgresse           #+#    #+#             */
-/*   Updated: 2023/03/02 16:08:11 by zrebhi           ###   ########.fr       */
+/*   Updated: 2023/03/09 01:04:44 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,36 +35,31 @@ char	*ft_strjoin_char(char const *s1, char c)
 	return (new_str);
 }
 
-char	*ft_remove_quote_in_string(char *string, bool quote, bool dquote)
+char	*ft_remove_quote_in_string(char *string,
+		bool quote, bool dquote, size_t i)
 {
 	char	*new_string;
-	size_t	i;
 
 	i = 0;
 	new_string = ft_strdup("");
 	while (string[i])
 	{
 		if (string[i] == '\'')
-			quote = !quote;
-		if (string[i] == '\"')
-			dquote = !dquote;
-		if (quote && string[i + 1])
 		{
-			i++;
-			while (string[i] && string[i] != '\'')
-				new_string = ft_strjoin_char(new_string, string[i++]);
+			quote = !quote;
+			while (string[++i] && string[i] != '\'')
+				new_string = ft_strjoin_char(new_string, string[i]);
 			quote = !quote;
 		}
-		else if (dquote && string[i + 1])
+		else if (string[i] == '\"')
 		{
-			i++;
-			while (string[i] && string[i] != '\"')
-				new_string = ft_strjoin_char(new_string, string[i++]);
+			dquote = !dquote;
+			while (string[++i] && string[i] != '\"')
+				new_string = ft_strjoin_char(new_string, string[i]);
 			dquote = !dquote;
 		}
 		else
-			new_string = ft_strjoin_char(new_string, string[i]);
-		i++;
+			new_string = ft_strjoin_char(new_string, string[i++]);
 	}
 	return (new_string);
 }

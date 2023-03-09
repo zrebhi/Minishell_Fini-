@@ -3,25 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrebhi <zrebhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:18:09 by bgresse           #+#    #+#             */
-/*   Updated: 2023/03/02 16:08:25 by zrebhi           ###   ########.fr       */
+/*   Updated: 2023/03/09 01:04:27 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 char	*ft_strjoin_char(char const *s1, char c);
-char	*ft_remove_quote_in_string(char *string, bool quote, bool dquote);
+char	*ft_remove_quote_in_string(char *string,
+			bool quote, bool dquote, size_t i);
 char	*ft_check_key(t_env *head, char *key);
 
 char	*ft_expand_var(t_env **head, char *cmds)
 {
 	size_t	i;
 	char	*new_cmds;
-	bool 	dquote;
-	bool 	quote;
+	bool	dquote;
+	bool	quote;
 
 	quote = false;
 	dquote = false;
@@ -69,7 +70,7 @@ char	**ft_remove_quotes(char **cmds)
 	while (cmds[i])
 	{
 		if (ft_strchr(cmds[i], '\'') || ft_strchr(cmds[i], '\"'))
-			cmds[i] = ft_remove_quote_in_string(cmds[i], false, false);
+			cmds[i] = ft_remove_quote_in_string(cmds[i], false, false, 0);
 		i++;
 	}
 	return (cmds);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrebhi <zrebhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:02:59 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/08 19:31:52 by zrebhi           ###   ########.fr       */
+/*   Updated: 2023/03/09 00:57:54 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ static char	*get_prompt(t_env *head, char *key)
 	}
 	return (""GREEN"➜  "CYAN"guest"PURPLE"@minishell > "RESET"");
 }
-
 
 void	ft_prompt(t_minishell *data)
 {
