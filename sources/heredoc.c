@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zrebhi <zrebhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:52:56 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/08 23:37:52 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/09 13:39:52 by zrebhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,11 @@ void	ft_heredoc(t_cmdlist *cmds, t_env **head)
 	waitpid(here_doc_pid, &status, 0);
 	g_status = WEXITSTATUS(status);
 	if (g_status)
+	{
+		cmds->error = 1;
 		if (close(cmds->here_doc_pipe[0]) == -1)
-			return (cmds->error = 1, perror("close pipe"));
+			return (perror("close pipe"));
+	}
 }
 
 void	ft_redirect_pipe(t_cmdlist **cmds);
@@ -73,16 +76,23 @@ char	**ft_remove_quotes(char **strs);
 void	ft_print_error(char **parsed_line, int i);
 int		ft_error(char **parsed_line, int i);
 
+int	ft_init_parsed_line(char *cmd_line, char ***parsed_line)
+{
+	*parsed_line = ft_split_tokens(cmd_line, "<|>");
+	if (!*parsed_line)
+		return (0);
+	*parsed_line = ft_remove_quotes(*parsed_line);
+	if (!*parsed_line)
+		return (0);
+	return (1);
+}
+
 int	ft_check_heredoc(char *cmd_line, t_cmdlist *cmds, t_env **head)
 {
 	char	**parsed_line;
 	int		i;
 
-	parsed_line = ft_split_tokens(cmd_line, "<|>");
-	if (!parsed_line)
-		return (0);
-	parsed_line = ft_remove_quotes(parsed_line);
-	if (!parsed_line)
+	if (!ft_init_parsed_line(cmd_line, &parsed_line))
 		return (0);
 	i = -1;
 	while (parsed_line[++i])

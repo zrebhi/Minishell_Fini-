@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zrebhi <zrebhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 13:17:49 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/08 23:37:18 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/09 13:24:30 by zrebhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	ft_exec(t_minishell *data)
 	if (!ft_strncmp(data->cmds->full_cmd[0], "./", 2) \
 	&& access(data->cmds->full_cmd[0], X_OK) == -1)
 		return (perror(data->cmds->full_cmd[0]), exit(126));
+	execve(data->cmds->full_cmd[0], data->cmds->full_cmd, data->envp);
 	data->paths = ft_pathfinder(&data->head_env);
 	i = -1;
-	execve(data->cmds->full_cmd[0], data->cmds->full_cmd, data->envp);
 	if (data->paths)
 	{
 		while (data->paths[++i])
@@ -75,7 +75,7 @@ int	pipex_heredoc(t_minishell *data)
 		if (!data->cmds->limiter || data->cmds->error)
 			return (0);
 		if (dup2(data->cmds->here_doc_pipe[0], STDIN_FILENO) == -1)
-			return (perror("dup2 heredoc"), 0);
+			return (perror("dup2 heredoc here"), 0);
 		if (close(data->cmds->here_doc_pipe[0]) == -1)
 			return (perror("close pipe"), 0);
 	}
@@ -102,6 +102,8 @@ void	pipex_commands(t_minishell *data)
 			return ((void)perror("Fork"));
 		if (data->cmds->cmd_pid == 0)
 			ft_incubator(data);
+		if (!ft_strcmp(data->cmds->full_cmd[0], "./minishell"))
+			unplug_signals();
 		if (close(data->end[1]) == -1)
 			return ((void)perror("close pipe"));
 		if (dup2(data->end[0], STDIN_FILENO) == -1)

@@ -6,7 +6,7 @@
 /*   By: zrebhi <zrebhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:12:12 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/08 18:55:26 by zrebhi           ###   ########.fr       */
+/*   Updated: 2023/03/09 13:55:39 by zrebhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_newnode(t_cmdlist **cmds);
 /* The 3 following functions handle the error message of bash
 for invalid redirections. */
 
-int	ft_error(char **parsed_line, int i)
+int	ft_error_outfile_redirection(char **parsed_line, int i)
 {
 	if (!ft_strcmp(parsed_line[i], ">"))
 	{
@@ -35,6 +35,16 @@ int	ft_error(char **parsed_line, int i)
 			|| !ft_strcmp(parsed_line[i + 1], "<<"))
 			return (2);
 	}
+	return (0);
+}
+
+int	ft_error(char **parsed_line, int i)
+{
+	int	error;
+
+	error = ft_error_outfile_redirection(parsed_line, i);
+	if (error)
+		return (error);
 	if ((!ft_strcmp(parsed_line[i], ">>") \
 		|| !ft_strcmp(parsed_line[i], "<") \
 		|| !ft_strcmp(parsed_line[i], "<<")))
