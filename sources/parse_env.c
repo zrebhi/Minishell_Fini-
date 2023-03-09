@@ -6,13 +6,21 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:06:30 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/09 00:57:11 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/09 10:52:55 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 int	ft_list_size(t_env *head);
+
+static void	initialize_env(t_env **head)
+{
+	*head = add_node(*head, "_", "/usr/bin/env", true);
+	*head = add_node(*head, "SHLVL", "1", true);
+	*head = add_node(*head, "PWD", getcwd(NULL, 0), true);
+	*head = add_node(*head, "OLDPWD", "", false);
+}
 
 void	ft_parse_env(t_env **head, char **envp)
 {
@@ -23,12 +31,7 @@ void	ft_parse_env(t_env **head, char **envp)
 
 	i = 0;
 	if (!envp[0])
-	{
-		*head = add_node(*head, "_", "/usr/bin/env", true);
-		*head = add_node(*head, "SHLVL", "1", true);
-		*head = add_node(*head, "PWD", getcwd(NULL, 0), true);
-		*head = add_node(*head, "OLDPWD", "", false);
-	}
+		initialize_env(head);
 	while (envp[i])
 	{
 		equal = ft_strchr(envp[i], '=');
