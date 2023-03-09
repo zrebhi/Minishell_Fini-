@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:31:03 by bgresse           #+#    #+#             */
-/*   Updated: 2023/03/09 11:03:15 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/09 15:28:27 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,31 +35,36 @@ char	*ft_strjoin_char(char const *s1, char c)
 	return (new_str);
 }
 
-char	*ft_remove_quote_in_string(char *string,
-		bool quote, bool dquote, size_t i)
+char	*ft_remove_quote_in_string(char *string, bool quote, bool dquote)
 {
 	char	*new_string;
+	size_t	i;
 
 	i = 0;
 	new_string = ft_strdup("");
 	while (string[i])
 	{
 		if (string[i] == '\'')
-		{
 			quote = !quote;
-			while (string[++i] && string[i] != '\'')
-				new_string = ft_strjoin_char(new_string, string[i]);
+		if (string[i] == '\"')
+			dquote = !dquote;
+		if (quote && string[i + 1])
+		{
+			i++;
+			while (string[i] && string[i] != '\'')
+				new_string = ft_strjoin_char(new_string, string[i++]);
 			quote = !quote;
 		}
-		if (string[i] == '\"')
+		else if (dquote && string[i + 1])
 		{
-			dquote = !dquote;
-			while (string[++i] && string[i] != '\"')
-				new_string = ft_strjoin_char(new_string, string[i]);
+			i++;
+			while (string[i] && string[i] != '\"')
+				new_string = ft_strjoin_char(new_string, string[i++]);
 			dquote = !dquote;
 		}
 		else
-			new_string = ft_strjoin_char(new_string, string[i++]);
+			new_string = ft_strjoin_char(new_string, string[i]);
+		i++;
 	}
 	return (new_string);
 }
