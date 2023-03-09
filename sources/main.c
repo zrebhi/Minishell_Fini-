@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:02:59 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/09 00:57:54 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/09 10:54:51 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ char	**ft_refresh_envp(t_env *head)
 		head = head->next;
 	}
 	env[i] = NULL;
-	
 	return (env);
 }
 
@@ -84,7 +83,6 @@ void	ft_prompt(t_minishell *data)
 		add_history(buffer);
 		data->cmds = ft_cmdlist(buffer, data);
 		free(buffer);
-		// ft_print_cmdlist(data->cmds);
 		if (data->cmds)
 		{
 			unplug_signals();
@@ -96,7 +94,8 @@ void	ft_prompt(t_minishell *data)
 			g_status = WEXITSTATUS(data->status);
 			while (data->cmds)
 			{
-				if (data->cmds->here_doc && close(data->cmds->here_doc_pipe[0]) == -1)
+				if (data->cmds->here_doc && \
+				close(data->cmds->here_doc_pipe[0]) == -1)
 					perror("close pipe main");
 				if (data->cmds->outfile > 1 && close(data->cmds->outfile) == -1)
 					perror("close outfile");
@@ -106,7 +105,7 @@ void	ft_prompt(t_minishell *data)
 			}
 		}
 	}	
-		printf("exit\n");
+	printf("exit\n");
 }
 
 int	main(int argc, char **argv, char **envp)

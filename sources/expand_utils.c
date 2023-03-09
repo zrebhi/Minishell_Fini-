@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:31:03 by bgresse           #+#    #+#             */
-/*   Updated: 2023/03/09 01:04:44 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/09 11:03:15 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*ft_remove_quote_in_string(char *string,
 				new_string = ft_strjoin_char(new_string, string[i]);
 			quote = !quote;
 		}
-		else if (string[i] == '\"')
+		if (string[i] == '\"')
 		{
 			dquote = !dquote;
 			while (string[++i] && string[i] != '\"')
