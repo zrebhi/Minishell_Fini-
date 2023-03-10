@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmdlist_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrebhi <zrebhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:03:53 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/06 11:35:54 by zrebhi           ###   ########.fr       */
+/*   Updated: 2023/03/09 20:23:17 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_cmdlist	*ft_cmdnew(void)
 {
 	t_cmdlist	*new;
 
-	new = malloc(sizeof(*new));
+	new = ft_free_malloc(global.m_free, (sizeof(*new)));
 	if (!new)
 		return (0);
 	new->full_cmd = 0;

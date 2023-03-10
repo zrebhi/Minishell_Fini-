@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:02:59 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/09 10:54:51 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/10 14:26:10 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	data_init(int argc, char **argv, char **envp, t_minishell *data)
 	data->envp = envp;
 	ft_parse_env(&data->head_env, data->envp);
 	data->paths = ft_pathfinder(&data->head_env);
-	g_status = 0;
+	global.g_status = 0;
 }
 
 char	**ft_refresh_envp(t_env *head)
@@ -34,7 +34,9 @@ char	**ft_refresh_envp(t_env *head)
 	if (!head)
 		return (NULL);
 	env_len = ft_list_size(head);
-	env = malloc(sizeof(char *) * env_len);
+	env = ft_free_malloc(global.m_free, (sizeof(char *) * env_len));
+	if (!env)
+		return (ft_free(global.m_free), exit(1), NULL);
 	i = 0;
 	while (head)
 	{
@@ -45,23 +47,26 @@ char	**ft_refresh_envp(t_env *head)
 		i++;
 		head = head->next;
 	}
-	env[i] = NULL;
+	// env[i] = NULL;
 	return (env);
 }
 
 static char	*get_prompt(t_env *head, char *key)
 {
-	t_env	*temp;
+	(void)key;
+	(void)head;
+	return ("minishell > ");
+	// t_env	*temp;
 
-	temp = head;
-	while (temp)
-	{
-		if (ft_strcmp(temp->key, key) == 0)
-			return (ft_strjoin(ft_strjoin(""GREEN"➜  "CYAN"", temp->value),
-					""PURPLE"@minishell > "RESET""));
-		temp = temp->next;
-	}
-	return (""GREEN"➜  "CYAN"guest"PURPLE"@minishell > "RESET"");
+	// temp = head;
+	// while (temp)
+	// {
+	// 	if (ft_strcmp(temp->key, key) == 0)
+	// 		return (ft_strjoin(ft_strjoin(""GREEN"➜  "CYAN"", temp->value),
+	// 				""PURPLE"@minishell > "RESET""));
+	// 	temp = temp->next;
+	// }
+	// return (""GREEN"➜  "CYAN"guest"PURPLE"@minishell > "RESET"");
 }
 
 void	ft_prompt(t_minishell *data)
@@ -91,7 +96,7 @@ void	ft_prompt(t_minishell *data)
 			if (pid == 0)
 				pipex(data);
 			waitpid(pid, &data->status, 0);
-			g_status = WEXITSTATUS(data->status);
+			global.g_status = WEXITSTATUS(data->status);
 			while (data->cmds)
 			{
 				if (data->cmds->here_doc && \
@@ -112,8 +117,10 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_minishell	*data;
 
-	data = malloc(sizeof(t_minishell));
+	global.m_free = ft_free_init();
+	data = ft_free_malloc(global.m_free, (sizeof(t_minishell)));
 	data_init(argc, argv, envp, data);
 	ft_prompt(data);
-	return (g_status);
+	ft_free(global.m_free);
+	return (global.g_status);
 }

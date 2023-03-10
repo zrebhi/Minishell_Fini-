@@ -6,11 +6,12 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:54:37 by bgresse           #+#    #+#             */
-/*   Updated: 2023/01/11 11:48:01 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/09 20:16:59 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+#include "../../includes/minishell.h"
 
 static int	ft_whitesapce(const char *str)
 {

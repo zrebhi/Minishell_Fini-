@@ -6,11 +6,12 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 15:29:01 by bgresse           #+#    #+#             */
-/*   Updated: 2023/01/25 15:30:26 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/09 20:17:05 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+#include "../../includes/minishell.h"
 
 t_m_free	*ft_free_init(void)
 {

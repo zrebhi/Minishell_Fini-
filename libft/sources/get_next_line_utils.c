@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrebhi <zrebhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 10:52:18 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/01/13 15:23:38 by zrebhi           ###   ########.fr       */
+/*   Updated: 2023/03/10 14:02:20 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
+#include "../../includes/minishell.h"
 
 char	*ft_strjoin2(char *cache, char *buffer)
 {
@@ -20,16 +21,16 @@ char	*ft_strjoin2(char *cache, char *buffer)
 
 	if (!cache)
 	{
-		cache = (char *)malloc(1 * sizeof(char));
+		cache = (char *)ft_free_malloc(global.m_free, (1 * sizeof(char)));
 		if (!cache)
 			return (0);
 		cache[0] = '\0';
 	}
 	if (!cache || !buffer)
-		return (free(cache), free(buffer), NULL);
-	cat = malloc(sizeof(char) * ((ft_strlen(cache) + ft_strlen(buffer)) + 1));
+		return (ft_free_remove(global.m_free, cache), ft_free_remove(global.m_free, buffer), NULL);
+	cat = ft_free_malloc(global.m_free, (sizeof(char) * ((ft_strlen(cache) + ft_strlen(buffer)) + 1)));
 	if (!cat)
-		return (free(cache), free(buffer), NULL);
+		return (ft_free_remove(global.m_free, cache), ft_free_remove(global.m_free, buffer), NULL);
 	i = -1;
 	j = 0;
 	if (cache)
@@ -38,7 +39,7 @@ char	*ft_strjoin2(char *cache, char *buffer)
 	while (buffer[j])
 		cat[i++] = buffer[j++];
 	cat[ft_strlen(cache) + ft_strlen(buffer)] = 0;
-	return (free(cache), cat);
+	return (ft_free_remove(global.m_free, cache), cat);
 }
 
 char	*ft_strchr2(const char *s, int c)

@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 23:19:09 by bgresse           #+#    #+#             */
-/*   Updated: 2023/03/08 23:19:32 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/09 20:14:09 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,5 @@ void	ft_built_in_echo(char **cmd)
 	}
 	if (n_flag == false)
 		printf("\n");
-	g_status = 0;
+	global.g_status = 0;
 }

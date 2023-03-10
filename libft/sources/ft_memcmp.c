@@ -6,11 +6,12 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 12:03:40 by bgresse           #+#    #+#             */
-/*   Updated: 2023/01/11 11:48:56 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/09 20:18:33 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+#include "../../includes/minishell.h"
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {

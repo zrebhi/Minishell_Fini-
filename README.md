@@ -1,2 +1,0 @@
-# zack
-# Minishell_Fini-

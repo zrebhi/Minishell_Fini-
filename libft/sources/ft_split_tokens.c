@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_tokens.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrebhi <zrebhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 19:37:03 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/06 15:35:38 by zrebhi           ###   ########.fr       */
+/*   Updated: 2023/03/09 20:19:44 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+#include "../../includes/minishell.h"
 
 void		ft_quotes(char const *s, int *j);
 int			ft_separator(char c, char *charset);
@@ -47,7 +48,7 @@ static char	*ft_dupstr(char const *s, int i, int j)
 	char	*dup;
 	int		x;
 
-	dup = malloc(sizeof(char) * (j - i + 1));
+	dup = ft_free_malloc(global.m_free, (sizeof(char) * (j - i + 1)));
 	if (!dup)
 		return (0);
 	x = 0;
@@ -120,7 +121,7 @@ char	**ft_split_tokens(char const *s, char *charset)
 	lines.x = 0;
 	if (!s)
 		return (0);
-	lines.strs = malloc(sizeof(char *) * (ft_words(s, charset, 0, 0) + 1));
+	lines.strs = ft_free_malloc(global.m_free, (sizeof(char *) * (ft_words(s, charset, 0, 0) + 1)));
 	if (!lines.strs)
 		return (NULL);
 	lines.strs = ft_lines(s, charset, &lines);
@@ -129,18 +130,3 @@ char	**ft_split_tokens(char const *s, char *charset)
 	return (lines.strs);
 }
 
-// int	main()
-// {
-// 	int	i;
-// 	char *line = "echo salut >> outfile";
-// 	char **strs;
-
-// 	i = -1;
-// 	printf("%d words\n", ft_words(line, "<|>"));
-// 	strs = ft_split_tokens(line, "<|>");
-// 	printf("---------------\n");
-// 	while(strs[++i])
-// 	{
-// 		printf("strs[%d] :%s\n", i, strs[i]);
-// 	}
-// }

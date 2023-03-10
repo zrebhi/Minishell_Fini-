@@ -6,11 +6,12 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:35:20 by bgresse           #+#    #+#             */
-/*   Updated: 2023/01/11 11:48:37 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/10 14:01:29 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+#include "../../includes/minishell.h"
 
 void	ft_lstdelone(t_list *lst, void (*del)(void*))
 {
@@ -19,6 +20,6 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*))
 	if (lst)
 	{
 		del(lst->content);
-		free(lst);
+		ft_free_remove(global.m_free, lst);
 	}
 }

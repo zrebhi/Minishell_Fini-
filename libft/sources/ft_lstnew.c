@@ -6,17 +6,18 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:33:35 by bgresse           #+#    #+#             */
-/*   Updated: 2023/01/11 11:48:47 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/09 20:18:09 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+#include "../../includes/minishell.h"
 
 t_list	*ft_lstnew(void *content)
 {
 	t_list	*new;
 
-	new = (t_list *)malloc(sizeof(t_list));
+	new = (t_list *)ft_free_malloc(global.m_free, sizeof(t_list));
 	if (!new)
 		return (NULL);
 	new->next = NULL;

@@ -6,11 +6,12 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:33:09 by bgresse           #+#    #+#             */
-/*   Updated: 2023/01/11 11:49:19 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/09 20:18:51 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+#include "../../includes/minishell.h"
 
 void	ft_putnbr_fd(int n, int fd)
 {

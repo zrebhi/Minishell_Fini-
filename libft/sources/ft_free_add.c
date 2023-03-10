@@ -6,11 +6,12 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 15:28:07 by bgresse           #+#    #+#             */
-/*   Updated: 2023/01/25 15:40:02 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/09 20:16:21 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+#include "../../includes/minishell.h"
 
 int	ft_free_add_value(t_m_free *m_free, t_free *new, t_free *tmp)
 {

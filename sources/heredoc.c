@@ -6,7 +6,7 @@
 /*   By: zrebhi <zrebhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:52:56 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/09 13:39:52 by zrebhi           ###   ########.fr       */
+/*   Updated: 2023/03/10 15:39:17 by zrebhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	ft_input(t_cmdlist *cmds, t_env **head_env)
 		line = ft_expand_var(head_env, line);
 		ft_putstr_fd(line, 2);
 		ft_putstr_fd("\n", 2);
-		free(line);
+		ft_free_remove(global.m_free, line);
 	}
 	exit(0);
 }
@@ -100,7 +100,7 @@ int	ft_check_heredoc(char *cmd_line, t_cmdlist *cmds, t_env **head)
 		if (ft_error(parsed_line, i))
 		{
 			ft_print_error(parsed_line, i);
-			g_status = 2;
+			global.g_status = 2;
 			return (0);
 		}
 		if (!ft_strcmp(parsed_line[i], "|"))
