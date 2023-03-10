@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:35:20 by bgresse           #+#    #+#             */
-/*   Updated: 2023/03/09 20:17:45 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/10 14:01:29 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*))
 	if (lst)
 	{
 		del(lst->content);
-		free(lst);
+		ft_free_remove(global.m_free, lst);
 	}
 }

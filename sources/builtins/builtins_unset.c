@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 23:13:52 by bgresse           #+#    #+#             */
-/*   Updated: 2023/03/08 23:13:54 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/10 14:04:03 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	remove_env_node(t_env **head, char *key)
 	if (current != NULL && ft_strcmp(current->key, key) == 0)
 	{
 		*head = current->next;
-		return (free(current->key), free(current->value), free(current));
+		return (ft_free_remove(global.m_free, current->key), ft_free_remove(global.m_free, current->value), ft_free_remove(global.m_free, current));
 	}
 	while (current != NULL && ft_strcmp(current->key, key) != 0)
 	{
@@ -32,7 +32,7 @@ static void	remove_env_node(t_env **head, char *key)
 	if (current == NULL)
 		return ;
 	prev->next = current->next;
-	return (free(current->key), free(current->value), free(current));
+	return (ft_free_remove(global.m_free, current->key), ft_free_remove(global.m_free, current->value), ft_free_remove(global.m_free, current));
 }
 
 void	ft_built_in_unset(t_env **head, char **key_list)

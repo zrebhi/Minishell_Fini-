@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 00:40:36 by bgresse           #+#    #+#             */
-/*   Updated: 2023/03/09 21:17:18 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/10 14:03:10 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,5 @@ void	ft_print_env_sorted(t_env *env)
 	copy_env_to_array(env, array, count);
 	sort_env_array(array, count);
 	print_sorted_env_array(array, count);
-	free(array);
+	ft_free_remove(global.m_free, array);
 }

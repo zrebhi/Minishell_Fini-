@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 13:18:32 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/09 20:23:31 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/10 14:27:36 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	ft_list_size(t_env *head)
 	int	count;
 
 	count = 0;
+	if (!head)
+		return (0);
 	while (head)
 	{
 		count++;

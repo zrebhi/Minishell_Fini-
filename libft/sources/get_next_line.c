@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 15:36:10 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/09 20:22:40 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/10 14:03:47 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	*ft_read_line(int fd, char *cache)
 	{
 		readlen = read(fd, buffer, BUFFER_SIZE);
 		if (readlen == -1)
-			return (free(cache), NULL);
+			return (ft_free_remove(global.m_free, cache), NULL);
 		buffer[readlen] = 0;
 		cache = ft_strjoin2(cache, buffer);
 		if (!cache)
@@ -83,11 +83,11 @@ static char	*ft_after_line(char *cache)
 	j = 0;
 	i = 0;
 	if (!cache)
-		return (free(cache), NULL);
+		return (ft_free_remove(global.m_free, cache), NULL);
 	while (cache[i] && cache[i] != '\n')
 		i++;
 	if (!cache[i])
-		return (free(cache), NULL);
+		return (ft_free_remove(global.m_free, cache), NULL);
 	i++;
 	str = ft_free_malloc(global.m_free, (sizeof(char) * (ft_strlen(cache) - i + 1)));
 	if (!str)
@@ -95,7 +95,7 @@ static char	*ft_after_line(char *cache)
 	while (cache[i])
 		str[j++] = cache[i++];
 	str[j] = 0;
-	return (free(cache), str);
+	return (ft_free_remove(global.m_free, cache), str);
 }
 
 char	*get_next_line(int fd)
@@ -107,7 +107,7 @@ char	*get_next_line(int fd)
 		return (0);
 	cache[fd] = ft_read_line(fd, cache[fd]);
 	if (!cache[fd])
-		return (free(cache[fd]), NULL);
+		return (ft_free_remove(global.m_free, cache[fd]), NULL);
 	line = ft_new_line(cache[fd]);
 	cache[fd] = ft_after_line(cache[fd]);
 	return (line);

@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:02:59 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/09 21:16:46 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/10 14:26:10 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ char	**ft_refresh_envp(t_env *head)
 		return (NULL);
 	env_len = ft_list_size(head);
 	env = ft_free_malloc(global.m_free, (sizeof(char *) * env_len));
+	if (!env)
+		return (ft_free(global.m_free), exit(1), NULL);
 	i = 0;
 	while (head)
 	{
@@ -45,23 +47,26 @@ char	**ft_refresh_envp(t_env *head)
 		i++;
 		head = head->next;
 	}
-	env[i] = NULL;
+	// env[i] = NULL;
 	return (env);
 }
 
 static char	*get_prompt(t_env *head, char *key)
 {
-	t_env	*temp;
+	(void)key;
+	(void)head;
+	return ("minishell > ");
+	// t_env	*temp;
 
-	temp = head;
-	while (temp)
-	{
-		if (ft_strcmp(temp->key, key) == 0)
-			return (ft_strjoin(ft_strjoin(""GREEN"➜  "CYAN"", temp->value),
-					""PURPLE"@minishell > "RESET""));
-		temp = temp->next;
-	}
-	return (""GREEN"➜  "CYAN"guest"PURPLE"@minishell > "RESET"");
+	// temp = head;
+	// while (temp)
+	// {
+	// 	if (ft_strcmp(temp->key, key) == 0)
+	// 		return (ft_strjoin(ft_strjoin(""GREEN"➜  "CYAN"", temp->value),
+	// 				""PURPLE"@minishell > "RESET""));
+	// 	temp = temp->next;
+	// }
+	// return (""GREEN"➜  "CYAN"guest"PURPLE"@minishell > "RESET"");
 }
 
 void	ft_prompt(t_minishell *data)
@@ -76,8 +81,6 @@ void	ft_prompt(t_minishell *data)
 		prompt = get_prompt(data->head_env, "USER");
 		set_interactive_signals();
 		buffer = readline(prompt);
-		if (ft_strcmp(buffer, "exit") == 0)
-			break; lseek
 		if (!buffer)
 			break ;
 		if (!*buffer)

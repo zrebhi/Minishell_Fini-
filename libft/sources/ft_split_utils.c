@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 16:45:19 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/09 20:20:07 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/10 14:01:44 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	**ft_free_strs(char **strs)
 
 	i = -1;
 	while (strs[++i])
-		free(strs[i]);
-	free(strs);
+		ft_free_remove(global.m_free, strs[i]);
+	ft_free_remove(global.m_free, strs);
 	return (0);
 }
