@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_rev_int_tab.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgresse <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 13:43:43 by bgresse           #+#    #+#             */
-/*   Updated: 2022/09/03 13:43:48 by bgresse          ###   ########lyon.fr   */
+/*   Updated: 2023/03/09 20:18:58 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../includes/minishell.h"
 
 void	ft_rev_int_tab(int *tab, int size)
 {

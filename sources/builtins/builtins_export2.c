@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 00:40:36 by bgresse           #+#    #+#             */
-/*   Updated: 2023/03/09 00:53:12 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/09 21:17:18 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	ft_print_env_sorted(t_env *env)
 	int		count;
 
 	count = ft_list_size(env);
-	array = malloc(count * sizeof(t_env *));
+	array = ft_free_malloc(global.m_free, (count * sizeof(t_env *)));
 	if (!array)
 		return ;
 	copy_env_to_array(env, array, count);

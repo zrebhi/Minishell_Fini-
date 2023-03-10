@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sort_int_tab.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgresse <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 12:07:47 by bgresse           #+#    #+#             */
-/*   Updated: 2022/09/03 13:41:37 by bgresse          ###   ########lyon.fr   */
+/*   Updated: 2023/03/09 20:19:03 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../includes/minishell.h"
 
 void	ft_sort_int_tab(int *tab, int size)
 {

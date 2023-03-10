@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 17:31:03 by bgresse           #+#    #+#             */
-/*   Updated: 2023/03/09 15:28:27 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/09 20:23:44 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strjoin_char(char const *s1, char c)
 	if (!s1)
 		return (NULL);
 	len1 = ft_strlen(s1);
-	new_str = malloc(sizeof(char) * (len1 + 2));
+	new_str = ft_free_malloc(global.m_free, (sizeof(char) * (len1 + 2)));
 	if (!new_str)
 		return (NULL);
 	i = 0;

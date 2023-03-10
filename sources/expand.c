@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 19:18:09 by bgresse           #+#    #+#             */
-/*   Updated: 2023/03/09 11:02:16 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/09 20:14:09 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*ft_expand_var(t_env **head, char *cmds)
 			&& cmds[i + 1] == '?')
 		{
 			i++;
-			new_cmds = ft_strjoin(new_cmds, ft_itoa(g_status));
+			new_cmds = ft_strjoin(new_cmds, ft_itoa(global.g_status));
 		}
 		else
 			new_cmds = ft_strjoin_char(new_cmds, cmds[i]);

@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 13:17:49 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/08 23:37:18 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/09 20:14:09 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,8 @@ void	pipex(t_minishell *data)
 	while (data->cmds)
 	{
 		waitpid(data->cmds->cmd_pid, &data->status, 0);
-		g_status = WEXITSTATUS(data->status);
+		global.g_status = WEXITSTATUS(data->status);
 		data->cmds = data->cmds->next;
 	}
-	exit (g_status);
+	exit (global.g_status);
 }

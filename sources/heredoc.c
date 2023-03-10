@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:52:56 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/08 23:37:52 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/09 20:14:09 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	ft_heredoc(t_cmdlist *cmds, t_env **head)
 	if (close(cmds->here_doc_pipe[1]) == -1)
 		return (perror("close pipe"));
 	waitpid(here_doc_pid, &status, 0);
-	g_status = WEXITSTATUS(status);
-	if (g_status)
+	global.g_status = WEXITSTATUS(status);
+	if (global.g_status)
 		if (close(cmds->here_doc_pipe[0]) == -1)
 			return (cmds->error = 1, perror("close pipe"));
 }
@@ -90,7 +90,7 @@ int	ft_check_heredoc(char *cmd_line, t_cmdlist *cmds, t_env **head)
 		if (ft_error(parsed_line, i))
 		{
 			ft_print_error(parsed_line, i);
-			g_status = 2;
+			global.g_status = 2;
 			return (0);
 		}
 		if (!ft_strcmp(parsed_line[i], "|"))

@@ -6,11 +6,12 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 16:45:19 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/02/27 23:53:28 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/09 20:20:07 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+#include "../../includes/minishell.h"
 
 /* The 2 following functions check if the quotes are closed
 and moves our int pointer past the last quote found.*/

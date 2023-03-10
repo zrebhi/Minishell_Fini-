@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrebhi <zrebhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 15:36:10 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/02/15 16:32:55 by zrebhi           ###   ########.fr       */
+/*   Updated: 2023/03/09 20:22:40 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
+#include "../../includes/minishell.h"
 
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 42
@@ -52,7 +53,7 @@ static char	*ft_new_line(char *cache)
 
 	if (cache[0] == 0)
 		return (0);
-	new_line = malloc(sizeof(char) * (ft_linelen(cache) + 1));
+	new_line = ft_free_malloc(global.m_free, (sizeof(char) * (ft_linelen(cache) + 1)));
 	if (!new_line)
 		return (0);
 	i = 0;
@@ -88,7 +89,7 @@ static char	*ft_after_line(char *cache)
 	if (!cache[i])
 		return (free(cache), NULL);
 	i++;
-	str = malloc(sizeof(char) * (ft_strlen(cache) - i + 1));
+	str = ft_free_malloc(global.m_free, (sizeof(char) * (ft_strlen(cache) - i + 1)));
 	if (!str)
 		return (0);
 	while (cache[i])

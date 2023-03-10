@@ -6,11 +6,12 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 15:30:19 by bgresse           #+#    #+#             */
-/*   Updated: 2023/01/25 15:39:55 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/09 20:17:08 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+#include "../../includes/minishell.h"
 
 void	*ft_free_malloc(t_m_free *m_free, size_t size)
 {

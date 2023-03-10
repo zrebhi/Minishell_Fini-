@@ -6,11 +6,12 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:45:30 by bgresse           #+#    #+#             */
-/*   Updated: 2023/01/11 11:48:26 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/09 20:18:22 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+#include "../../includes/minishell.h"
 
 static int	len(long nb)
 {
@@ -34,7 +35,7 @@ static char	*if_zero(void)
 {
 	char	*str;
 
-	str = (char *)malloc(sizeof(char) * 2);
+	str = (char *)ft_free_malloc(global.m_free, (sizeof(char) * 2));
 	if (!str)
 		return (NULL);
 	str[0] = 48;
@@ -52,7 +53,7 @@ char	*ft_itoa(int nb)
 	i = len(n);
 	if (n == 0)
 		return (if_zero());
-	str = (char *)malloc(sizeof(char) * (i + 1));
+	str = (char *)ft_free_malloc(global.m_free, (sizeof(char) * (i + 1)));
 	if (!str)
 		return (NULL);
 	str[i--] = '\0';

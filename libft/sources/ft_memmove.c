@@ -6,11 +6,12 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:12:48 by bgresse           #+#    #+#             */
-/*   Updated: 2023/01/11 11:49:02 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/09 20:18:41 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+#include "../../includes/minishell.h"
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {

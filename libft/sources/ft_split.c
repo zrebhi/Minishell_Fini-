@@ -6,11 +6,12 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 10:12:17 by bgresse           #+#    #+#             */
-/*   Updated: 2023/01/25 15:38:59 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/09 20:20:21 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+#include "../../includes/minishell.h"
 
 static int	ft_words(char const *s, char c)
 {
@@ -39,7 +40,7 @@ static char	*ft_dupstr(char const *s, int i, int j)
 	char	*dup;
 	int		x;
 
-	dup = malloc(sizeof(char) * (j - i + 1));
+	dup = ft_free_malloc(global.m_free, (sizeof(char) * (j - i + 1)));
 	if (!dup)
 		return (0);
 	x = 0;
@@ -94,7 +95,7 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 		return (0);
-	strs = malloc(sizeof(char *) * (ft_words(s, c) + 2));
+	strs = ft_free_malloc(global.m_free, (sizeof(char *) * (ft_words(s, c) + 2)));
 	if (!strs)
 		return (NULL);
 	strs = ft_lines(s, c, strs, 0);

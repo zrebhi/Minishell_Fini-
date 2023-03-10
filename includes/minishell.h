@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 23:12:58 by bgresse           #+#    #+#             */
-/*   Updated: 2023/03/08 23:13:00 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/09 20:13:55 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,14 @@ typedef struct s_minishell
 	int			status;
 }				t_minishell;
 
-int			g_status;
+typedef struct s_global
+{
+	int			g_status;
+	t_m_free	*m_free;
+}				t_global;
+
+t_global	global;
+
 char		**ft_pathfinder(t_env **head);
 char		*ft_expand_var(t_env **head, char *cmds);
 void		ft_parse_env(t_env **head, char **envp);

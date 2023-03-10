@@ -6,11 +6,12 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:02:32 by bgresse           #+#    #+#             */
-/*   Updated: 2023/01/11 11:48:17 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/09 20:17:26 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+#include "../../includes/minishell.h"
 
 int	ft_isascii(int c)
 {

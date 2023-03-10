@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_slash.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zrebhi <zrebhi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 19:37:03 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/02/15 16:32:16 by zrebhi           ###   ########.fr       */
+/*   Updated: 2023/03/09 20:19:21 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
+#include "../../includes/minishell.h"
 
 char		**ft_free_strs(char **strs);
 
@@ -41,7 +42,7 @@ static char	*ft_dupstr(char const *s, int i, int j)
 	char	*dup;
 	int		x;
 
-	dup = malloc(sizeof(char) * (j - i + 2));
+	dup = ft_free_malloc(global.m_free, (sizeof(char) * (j - i + 2)));
 	if (!dup)
 		return (0);
 	x = 0;
@@ -83,7 +84,7 @@ char	**ft_split_slash(char const *s, char c)
 
 	if (!s)
 		return (0);
-	strs = malloc(sizeof(char *) * (ft_words(s, c) + 2));
+	strs = ft_free_malloc(global.m_free, (sizeof(char *) * (ft_words(s, c) + 2)));
 	if (!strs)
 		return (NULL);
 	strs = ft_lines(s, c, strs, 0);
