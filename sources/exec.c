@@ -6,13 +6,29 @@
 /*   By: zrebhi <zrebhi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 13:17:49 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/09 13:24:30 by zrebhi           ###   ########.fr       */
+/*   Updated: 2023/03/10 14:46:24 by zrebhi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 int		ft_builtins(t_minishell *data);
+
+static int	is_a_directory(char *path)
+{
+	struct stat	path_stat;
+
+	path_stat.st_mode = 0;
+	stat(path, &path_stat);
+	if (S_ISDIR(path_stat.st_mode))
+	{
+		ft_putstr_fd("msh: ", 2);
+		ft_putstr_fd(path, 2);
+		ft_putstr_fd(" is a directory\n", 2);
+		return (1);
+	}
+	return (0);
+}
 
 /* Handles the executions of the commands and returns the corresponding error
 if the command was not found. */
@@ -21,10 +37,16 @@ void	ft_exec(t_minishell *data)
 {
 	int		i;
 	char	*cmd;
-
-	if (!ft_strncmp(data->cmds->full_cmd[0], "./", 2) \
-	&& access(data->cmds->full_cmd[0], X_OK) == -1)
-		return (perror(data->cmds->full_cmd[0]), exit(126));
+	
+	if (!ft_strncmp(data->cmds->full_cmd[0], "./", 2))
+	{
+		if (is_a_directory(data->cmds->full_cmd[0] + 2))
+			return (exit(126));
+		if (access(data->cmds->full_cmd[0], X_OK) == -1)
+			return (perror(data->cmds->full_cmd[0]), exit(126));
+		execve(data->cmds->full_cmd[0], data->cmds->full_cmd, data->envp);
+		exit(0);
+	}
 	execve(data->cmds->full_cmd[0], data->cmds->full_cmd, data->envp);
 	data->paths = ft_pathfinder(&data->head_env);
 	i = -1;
